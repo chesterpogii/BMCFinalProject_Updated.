@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "68786373233",
-    "project_id": "my-ecommerce-app-18",
-    "storage_bucket": "my-ecommerce-app-18.firebasestorage.app"
+    "project_number": "286302623890",
+    "project_id": "ecommerce-app-21",
+    "storage_bucket": "ecommerce-app-21.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:68786373233:android:5c8e920b7a92c3d93f91d0",
+        "mobilesdk_app_id": "1:286302623890:android:5f82fb67bd5edcc278ee4b",
         "android_client_info": {
           "package_name": "com.example.ecommerce_app"
         }
@@ -15,26 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDxMzWSRNgHYPbg-hyvCSNHtDM3oSWsJ7U"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:68786373233:android:298d1b79fb43d04b3f91d0",
-        "android_client_info": {
-          "package_name": "com.example.iray_my_app"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDxMzWSRNgHYPbg-hyvCSNHtDM3oSWsJ7U"
+          "current_key": "AIzaSyBa5RL8G7nCxS94D_4nweN03Xzqn-4wEp4"
         }
       ],
       "services": {

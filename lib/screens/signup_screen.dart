@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -16,6 +17,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   bool _isLoading = false;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   void dispose() {
@@ -34,11 +36,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
 
     try {
-      // 1. This is the Firebase command to CREATE a user
+      // 3. Create the user in Firebase Authentication
+      final UserCredential userCredential =
       await _auth.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+
+      // ✅ NEW PART: Save user info & role to Firestore
+      if (userCredential.user != null) {
+        await _firestore.collection('users').doc(userCredential.user!.uid).set({
+          'email': _emailController.text.trim(),
+          'role': 'user', // default role
+          'createdAt': FieldValue.serverTimestamp(),
+        });
+      }
 
       // 2. AuthWrapper will auto-navigate to HomeScreen.
 
@@ -101,8 +113,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 16),
               TextFormField(
-                controller: _passwordController, // 9. Link the controller
-                obscureText: true, // 10. This hides the password
+                controller: _passwordController,
+                obscureText: true,
                 decoration: const InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(),
@@ -124,7 +136,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    print('Sign Up Valid!');
+                    _signUp();
                   }
                 },
                 child: const Text('Sign Up'),
